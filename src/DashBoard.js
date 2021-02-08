@@ -7,28 +7,18 @@ import SearchResults from './SearchResults';
 const DashBoard = () => {
     const [searchTerm , setSearchTerm] = useState('')
     const [choice, setChoice] = useState("users")
-    const [results, setResults] = useState(null)
+    const [debouncedSearchTerm,setDebouncedSearchTerm] = useState(searchTerm)
+    const [debouncedChoice,setDebouncedChoice] = useState(searchTerm)
     const handleSubmit = (e) =>{
         e.preventDefault()
-        
-        fetch(`https://api.github.com/search/${choice}?q=${searchTerm}`,{
-            // method:"GET",
-            headers:{
-                "Authorization":`token ${sessionStorage.getItem('access_token')}`, 
-            }
-
-        })
-        .then(res => {
-            return res.json()
-        }
-        )
-        .then(data => setResults(data.items))
+        setDebouncedSearchTerm(searchTerm)
+        setDebouncedChoice(choice)
     }
 
     return (
-        <div>
-            DashBoard
-           <form onSubmit={handleSubmit}>
+        <div className="dashboard">
+            <h1 className="dashboard__heading">Dashboard</h1>
+           <form onSubmit={handleSubmit} className="dashboard__form">
                <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search..."/>
                <input type="radio" name="choice" checked={"users" === choice} onChange={e=>setChoice(e.target.value)} value="users" id="users"/>
                 <label htmlFor="users">Search Users</label>
@@ -36,7 +26,7 @@ const DashBoard = () => {
                <label htmlFor="repositories">Search repositories</label>
                <button type="submit">Search</button>
            </form>
-            {results && <SearchResults results={results} choice={choice}/>}
+            <SearchResults searchTerm={debouncedSearchTerm} choice={debouncedChoice}/>
         </div>
     )
 }
