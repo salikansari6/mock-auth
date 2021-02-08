@@ -10,6 +10,7 @@ const DashBoard = () => {
     const [results, setResults] = useState(null)
     const handleSubmit = (e) =>{
         e.preventDefault()
+        
         fetch(`https://api.github.com/search/${choice}?q=${searchTerm}`,{
             // method:"GET",
             headers:{
