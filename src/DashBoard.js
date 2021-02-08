@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import './Dashboard.css'
 import {useParams} from 'react-router-dom'
+import SearchResults from './SearchResults';
 
 
 const DashBoard = () => {
@@ -34,14 +35,7 @@ const DashBoard = () => {
                <label htmlFor="repositories">Search repositories</label>
                <button type="submit">Search</button>
            </form>
-
-            <div className="results">
-                {results && results.map(result =>{
-                    return <div className="result">
-                            <img src={result.owner.avatar_url} alt=""/>
-                    </div>
-                } )}
-            </div>
+            {results && <SearchResults results={results} choice={choice}/>}
         </div>
     )
 }
