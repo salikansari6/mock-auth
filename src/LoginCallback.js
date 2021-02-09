@@ -32,7 +32,7 @@ const LoginCallback = () => {
         }
  
         
-       getToken("https://github.com/login/oauth/access_token").then(() =>{
+       getToken("https://thingproxy.freeboard.io/fetch/https://github.com/login/oauth/access_token").then(() =>{
            window.location.pathname="/dashboard"
        })
        .catch(err => console.log(err))
