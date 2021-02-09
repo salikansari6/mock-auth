@@ -16,6 +16,7 @@ const LoginCallback = () => {
                     {
                         method:'POST',
                         headers:{
+                            "Access-Control-Allow-Origin":"*",
                             'Accept': 'application/json',
                         },
                         body: params
