@@ -7,7 +7,7 @@ import {fetchUserDetails,fetchUsers,fetchRepositories} from './services/api'
 
 
 const SearchResults = ({searchTerm,choice}) => {
-    const [results, setResults] = useState([]) 
+    const [results, setResults] = useState() 
     const [loading, setLoading] = useState(false)
     
     useEffect(() =>{
@@ -44,7 +44,8 @@ const SearchResults = ({searchTerm,choice}) => {
                     <Loading/>
                 </div>
     }
-    else{
+
+    if(results){
         return(
             <div className="results">
                 {choice === "users" && <UserList results={results} />}
