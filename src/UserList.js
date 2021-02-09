@@ -3,7 +3,7 @@ import FollowersIcon from './FollowersIcon'
 import RepositoryIcon from './RepositoryIcon'
 
 const UserList = ({results}) => {
-   return results.map(user =>{
+   return results && results.map(user =>{
     const {node_id,avatar_url,html_url,login,name,bio,public_repos,followers,location} = user
     return(<div className="user result" key={node_id}>
                 <img src={avatar_url} className="avatar" alt=""/>

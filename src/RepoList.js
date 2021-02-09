@@ -4,7 +4,7 @@ import StarIcon from './StarIcon'
 import formatNumber from './utilities/formatNumber'
 
 const RepoList = ({results}) => {
-    return results.map(repo =>{
+    return results && results.map(repo =>{
         const { full_name, description, stargazers_count , language,node_id ,license,html_url} = repo
         return(
             <div className="repo result" key={node_id}>

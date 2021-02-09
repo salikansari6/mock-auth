@@ -7,7 +7,7 @@ import {fetchUserDetails,fetchUsers,fetchRepositories} from './services/api'
 
 
 const SearchResults = ({searchTerm,choice}) => {
-    const [results, setResults] = useState([]) 
+    const [results, setResults] = useState(null) 
     const [loading, setLoading] = useState(false)
     
     useEffect(() =>{
