@@ -1,17 +1,19 @@
-import { render } from '@testing-library/react'
 import React,{useState,useEffect} from 'react'
-import RepoList from './RepoList'
-
 import './SearchResults.css'
-import {fetchUserDetails,fetchUsers,fetchRepositories} from './services/api'
 import UserList from './UserList'
+import RepoList from './RepoList'
+import Loading from './Loading'
+import {fetchUserDetails,fetchUsers,fetchRepositories} from './services/api'
+
 
 const SearchResults = ({searchTerm,choice}) => {
     const [results, setResults] = useState([]) 
+    const [loading, setLoading] = useState(false)
     
     useEffect(() =>{
         if(choice === "users"){  
             let promises = []
+            setLoading(true)
             fetchUsers(searchTerm)
             .then(data=>{
                 data.forEach(user =>{
@@ -21,19 +23,27 @@ const SearchResults = ({searchTerm,choice}) => {
         })
         .then(user =>{
             setResults(user)
+            setLoading(false)
         })
         .catch(err => console.log(err))
         
         }
 
         else if(choice === "repositories"){
+            setLoading(true)
             fetchRepositories(searchTerm)
-            .then(repositories => setResults(repositories) )
+            .then(repositories => {
+                setResults(repositories)
+                setLoading(false)
+            } )
         }
     },[choice,searchTerm])
 
-    console.log(results)
-
+    if(loading){
+        return <div className="loading-screen">
+                    <Loading/>
+                </div>
+    }
 
     return(
         <div className="results">
