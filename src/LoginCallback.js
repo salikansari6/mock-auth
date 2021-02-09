@@ -16,7 +16,7 @@ const LoginCallback = () => {
                     {
                         method:'POST',
                         headers:{
-                            // "Access-Control-Allow-Origin":"*",
+                            "Access-Control-Allow-Origin":"*",
                             'Accept': 'application/json',
                         },
                         body: params
@@ -31,7 +31,8 @@ const LoginCallback = () => {
         }
  
         
-       getToken("https://thingproxy.freeboard.io/fetch/https://github.com/login/oauth/access_token").then(() =>{
+       getToken("https://thingproxy.freeboard.io/fetch/https://github.com/login/oauth/access_token").then((res) =>{
+           res();
            window.location.pathname="/dashboard"
        })
        .catch(err => console.log(err))
