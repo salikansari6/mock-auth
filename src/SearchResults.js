@@ -44,13 +44,16 @@ const SearchResults = ({searchTerm,choice}) => {
                     <Loading/>
                 </div>
     }
+    else{
+        return(
+            <div className="results">
+                {choice === "users" && <UserList results={results} />}
+                {choice === "repositories" && <RepoList results={results}/> }
+            </div>
+        )
+    }
 
-    return(
-        <div className="results">
-            {choice === "users" && <UserList results={results} />}
-            {choice === "repositories" && <RepoList results={results}/> }
-        </div>
-    )
+
 
 
 
